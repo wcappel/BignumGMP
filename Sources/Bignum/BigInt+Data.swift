@@ -40,7 +40,7 @@ public extension BigInt {
 			p += 1
 			l -= 1
 		}
-		let data = Data(bytesNoCopy: p, count: l, deallocator: .custom({ _, _ in ptr.deallocate(capacity: k)}))
+		let data = Data(bytesNoCopy: p, count: l, deallocator: .custom({ _, _ in ptr.deallocate() }))
 		return data
 	}
 

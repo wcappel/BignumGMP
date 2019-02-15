@@ -1,0 +1,17 @@
+# Run `brew ls gmp` and replace $prefix and $Version with correct info
+# Add directory containing this file to PKG_CONFIG_PATH:
+# export PKG_CONFIG_PATH=`pwd`:$PKG_CONFIG_PATH
+# OR link this file into default folder:
+# ln -s /path/to/gmp.pc /usr/local/lib/pkgconfig/gmp.pc
+
+prefix=/usr/local/Cellar/gmp/6.1.2_2
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: gmp
+Description: GNU Multiple Precision Arithmetic Library
+URL: http://gmplib.org
+Version: 6.1.2
+Libs: -L${libdir} -lgmp
+Cflags: -I${includedir}
