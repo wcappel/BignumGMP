@@ -10,7 +10,7 @@
 import CGMP
 
 /// Big Integer type backed by `mpz_t`
-public class BigInt: ExpressibleByIntegerLiteral {
+public class BigInt: ExpressibleByIntegerLiteral, Codable {
 	/// Literal type to make this expressible by integer literal
 	public typealias IntegerLiteralType = Int64
 
@@ -42,6 +42,22 @@ public class BigInt: ExpressibleByIntegerLiteral {
 
 	/// Free the underlying `mpz_t` big integer
 	deinit { __gmpz_clear(&mpz) }
+
+    /// Initialise from decoding the hex representation to conform to Decodable
+    public required convenience init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        self.init(hex: try container.decode(String.self))
+    }
+
+    /// Encode the hex representation to conform to Encodable
+    public func encode(to encoder: Encoder) throws {
+        guard self.sign != -1 else {
+            throw EncodingError.invalidValue(self, .init(codingPath: encoder.codingPath,
+                                                         debugDescription: "Cannot encode negative values"))
+        }
+        var container = encoder.unkeyedContainer()
+        try container.encode(self.hex)
+    }
 
 	/// Compare two `BigInt`'s
 	///
