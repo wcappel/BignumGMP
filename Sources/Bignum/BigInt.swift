@@ -415,3 +415,15 @@ public func mod_exp(_ b: BigInt, _ p: UInt, _ m: BigInt) -> BigInt {
 	__gmpz_powm_ui(&r.mpz, &b.mpz, CUnsignedLong(p), &m.mpz)
 	return r
 }
+
+/// Inverse number operation
+///
+/// - Parameters:
+///   - a: number to invert
+///   - m: modulus
+/// - Returns: a^(-1) % m
+public func inverse(_ a: BigInt, _ m: BigInt) -> BigInt? {
+    let r = BigInt()
+    __gmpz_invert(&r.mpz, &a.mpz, &m.mpz)
+    return r
+}
