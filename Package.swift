@@ -8,6 +8,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "Bignum", dependencies: ["CGMP"]),
-        .systemLibrary(name: "CGMP", pkgConfig: "gmp", providers: [.brew(["gmp"], .apt(["libgmp-dev"]))])
+        .systemLibrary(name: "CGMP", pkgConfig: "gmp", providers: [.brew(["gmp"]), .apt(["libgmp-dev"])])
     ]
 )
