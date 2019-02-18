@@ -176,6 +176,29 @@ public extension BigInt {
 	public func isEven() -> Bool {
 		return !isOdd()
 	}
+
+    /// Return whether the receiver is definitely prime
+    /// About `reps` see `isProbablyPrime`
+    ///
+    /// - Parameter `reps`: number of probabilistic prime tests
+    /// - Parameter `secure`: whether answer is definite (`true`) or probabilistic (`false`)
+    /// - Returns: `true` iff receiver is (probably or definitely) prime, `false` otherwise
+    public func isPrime(rounds: Int = 15, secure: Bool = false) -> Bool {
+        let isProbPrime = isProbablyPrime(rounds: rounds)
+        return secure ? isProbPrime == 2 : isProbPrime > 0
+    }
+
+    /// Return if the receiver is probably prime
+    /// This function performs some trial divisions,
+    /// then `reps` Miller-Rabin probabilistic primality tests.
+    /// A higher `reps` value will reduce the chances of a non-prime
+    /// being identified as “probably prime”.
+    /// Reasonable values of reps are between 15 and 50.
+    ///
+    /// - Returns: `2` (definitely prime), `1` (probably prime), `0` (definitely non-prime)
+    public func isProbablyPrime(rounds: Int = 15) -> Int {
+        return Int(__gmpz_probab_prime_p(&mpz, Int32(rounds)))
+    }
 }
 
 // MARK: - Arithmetic operations
