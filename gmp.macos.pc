@@ -1,3 +1,5 @@
+# Install GMP via pkgconfig on MacOS
+# ----------------------------------
 # Run `brew ls gmp` and replace $prefix and $Version with correct info
 # Add directory containing this file to PKG_CONFIG_PATH:
 # export PKG_CONFIG_PATH=`pwd`:$PKG_CONFIG_PATH

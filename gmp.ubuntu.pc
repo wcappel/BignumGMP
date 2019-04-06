@@ -1,0 +1,22 @@
+# Install GMP via pkgconfig on Ubuntu
+# -----------------------------------
+# Run `sudo apt-get install libgmp-dev`
+# Replace $prefix and $Version with correct info
+# Add directory containing this file to PKG_CONFIG_PATH:
+# export PKG_CONFIG_PATH=`pwd`:$PKG_CONFIG_PATH
+# OR link this file into default folder:
+# ln -s /path/to/gmp.pc /usr/local/lib/pkgconfig/gmp.pc
+
+prefix=/usr/lib/x86_64-linux-gnu
+exec_prefix=${prefix}
+prefix=/usr/lib/x86_64-linux-gnu
+exec_prefix=${prefix}
+libdir=${exec_prefix}
+includedir=/usr/include/x86_64-linux-gnu
+
+Name: gmp
+Description: GNU Multiple Precision Arithmetic Library
+URL: http://gmplib.org
+Version: 6.1.2
+Libs: -L${libdir} -lgmp
+Cflags: -I${includedir}

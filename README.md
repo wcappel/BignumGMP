@@ -26,7 +26,7 @@ This library uses the [Swift Package Manager](https://swift.org/package-manager/
 
 ### Using pkg-config
 
-When you want to use `pkg-config` instead of manually adding the linker paths, look into `gmp.pc`. Make sure that the declared path fits your installation and make that file available to `pkg-config` by using for example _one of those commands_:
+When you want to use `pkg-config` instead of manually adding the linker paths, look into `gmp.*.pc`, depending on your system. Make sure that the declared path fits your installation and make that file available to `pkg-config` by using for example _one of those commands_:
 
 	export PKG_CONFIG_PATH=`pwd`:$PKG_CONFIG_PATH
 	ln -s /path/to/gmp.pc /usr/local/lib/pkgconfig/gmp.pc
