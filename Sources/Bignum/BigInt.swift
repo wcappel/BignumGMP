@@ -199,6 +199,34 @@ public extension BigInt {
     public func isProbablyPrime(rounds: Int = 15) -> Int {
         return Int(__gmpz_probab_prime_p(&mpz, Int32(rounds)))
     }
+    
+    public func bitSize() -> Int {
+        return Int(__gmpz_sizeinbase(&self.mpz, 2))
+    }
+    
+    public static func nextPrime(_ n: BigInt) -> BigInt {
+        let r = BigInt()
+        __gmpz_nextprime(&r.mpz, &n.mpz)
+        return r
+    }
+    
+    public static func randomInt(limit: BigInt) -> BigInt {
+        let r = BigInt()
+        var state = gmp_randstate_t()
+        __gmp_randinit_mt(&state)
+        __gmp_randseed_ui(&state, 100000);
+        __gmpz_urandomm(&r.mpz, &state, &limit.mpz)
+        return r
+    }
+    
+    public static func randomInt(bits: UInt) -> BigInt {
+        let r = BigInt()
+        var state = gmp_randstate_t()
+        __gmp_randinit_mt(&state)
+        __gmp_randseed_ui(&state, 100000);
+        __gmpz_urandomb(&r.mpz, &state, bits)
+        return r
+    }
 }
 
 // MARK: - Arithmetic operations
