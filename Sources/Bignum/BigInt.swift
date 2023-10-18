@@ -214,7 +214,7 @@ public extension BigInt {
         let r = BigInt()
         var state = gmp_randstate_t()
         __gmp_randinit_mt(&state)
-        __gmp_randseed_ui(&state, 100000);
+        __gmp_randseed_ui(&state, UInt.random(in: 0...UInt.max));
         __gmpz_urandomm(&r.mpz, &state, &limit.mpz)
         return r
     }
@@ -223,7 +223,7 @@ public extension BigInt {
         let r = BigInt()
         var state = gmp_randstate_t()
         __gmp_randinit_mt(&state)
-        __gmp_randseed_ui(&state, 100000);
+        __gmp_randseed_ui(&state, UInt.random(in: 0...UInt.max));
         __gmpz_urandomb(&r.mpz, &state, bits)
         return r
     }
